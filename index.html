@@ -1,9 +1,8 @@
 <html lang="en">
 <head>
 <!--
-- add feature: seperate pages into view
-- bug fix: new navigation direction. Instead of collasping hamburger menu, switch to simple two row nav
-- add inpiration tip to weigh-in page
+- sort and display users by weight loss. DONE
+- array function to take new weight, caculate weight loss, add to array, redisplay
 -->
 <link rel="stylesheet" href="libs/bootstrap.min.css">
 <!-- Optional Bootstrap theme -->
@@ -12,8 +11,8 @@
 <script src="libs/angular.min.js"></script>
 <!--ui-bootstrap needed for collasping the nav. Can also learn angularStrap -->
 <script src="libs/ui-bootstrap-tpls-2.5.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="10MON1.0.css"/>
-<script src="10MON1.2.js"></script>
+<link rel="stylesheet" type="text/css" href="10MON.css"/>
+<script src="10MON.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/> 
 <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1, maximum-scale=1" charset="utf-8">    
@@ -43,8 +42,8 @@
 </nav>   
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-0 col-sm-3 col-md-3 col-lg-3"></div><!--end of left main column  -->
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" >
+        <div class="col-xs-0 col-sm-0 col-md-3 col-lg-3"></div><!--end of left main column  -->
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" >
             <div class= "col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="view=='logInPage'">
                 <div class= "col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <h2>Log-In</h2><br><br>
@@ -108,7 +107,7 @@
                 <div class= "col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <h4>Weight Loss</h4>
                 </div><!--end of Weight loss title-->
-                <div class="row" ng-repeat="x in userData">
+                <div class="row" ng-repeat="x in userData | orderBy:'-weightLoss'">
                     
                     <div class= "col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         {{$index + 1}}
@@ -156,7 +155,7 @@
 
         </div><!--end of Weigh-In Page-->
         </div><!--end of central main column-->
-        <div class="col-xs-0 col-sm-3 col-md-3 col-lg-3"></div><!--end of right main column-->
+        <div class="col-xs-0 col-sm-0 col-md-3 col-lg-3"></div><!--end of right main column-->
     </div><!--end of row that contains the body -->
     
 </div><!--end of container of the row that contains the body -->
