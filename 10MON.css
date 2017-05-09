@@ -9,7 +9,7 @@ h1, h2 {
     text-align: right;   
 }
 
-                                    /* INPUT BUTTON Code*/
+                                    /* INPUT BUTTON and LABELS Code*/
 /* increase font-size of user input boxes and labels*/
 input, label {
     font-size: 140%;    
@@ -28,6 +28,18 @@ input {
     border-width: thin;
 }
 
+/*set app primary color schema to Submit and Reset Button Code*/
+.submitResetButtons {
+    background-color: FF9A00;
+    color: black;
+    font-weight: normal;
+}
+
+.btn {
+    font-weight: bolder;
+    font-size: 110%;
+}
+
                                     /*BACKGROUND COLOR*/
 /* background color for middle column in body. Looking for a super light blue color.*/
 body {
@@ -35,21 +47,43 @@ body {
     min-height: 100%;
 }
 
-/* background color for nav. Looking for a medium to dark green for constrast. Dark pine green 003300 background with goldenrod font*/
+/* background color for nav. Looking for a medium to dark green for constrast. Dark pine green 003300 or medium blue 073A7F background with goldenrod font (alternative: E03E00, FF7C00, FF9A00) */
 .navColor {
-    background-color: 003300;
-    color: goldenrod;
-}
-
-/* font color for nav links, goldenrod.*/
-nav h4 {
-    color: goldenrod;
+    background-color: 073A7F;
+    color: white;
 }
 
                                     /*BODY ELEMENTS CODE*/
 
+/* increase font size for ranking page information*/
 .rankingFontSize {
-    font-size: 120%;
+    font-size: 130%;
+}
+
+/* almost black font color for all text but the nav.*/
+p, h4 {
+    color: 333333;
+    
+}
+
+/* font color for nav links, goldenrod.*/
+nav h4 {
+    color: white;    
+}
+
+/* increase font size for logIn page intro and weighIn page randfom advice*/
+p {
+    font-size: 120%;    
 }
 
 
+                                /*NG-CLASS CODE*/
+
+.highlightCurrentUser {
+    font-weight: bolder;
+    color: 073A7F;
+}
+
+.weightScalePlus {
+    
+}
