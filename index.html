@@ -94,7 +94,7 @@
             </div><!--end of Log-in Page-->
         <div class= "col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="view=='rankingPage'"><!--start of Ranking Page-->
             <div class= "col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h2>Player Ranking</h2><br><br>
+                <h2>Player Ranking </h2><br><br>
             </div><!--end of Ranking Page title-->
  
             <div class="container-fluid">
@@ -109,7 +109,7 @@
                         <h4>Weight Loss</h4>
                     </div><!--end of Weight loss title-->
                 </div>    
-                <div class="row rankingFontSize" ng-repeat="x in newArray | orderBy:'-weightLoss'">
+                <div class="row rankingFontSize" ng-repeat="x in newArray | orderBy:'-weightLoss'" ng-class="{'highlightCurrentUser':x.name==currentUser}">
                     
                     <div class= "col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         {{$index + 1}}
@@ -118,10 +118,17 @@
                         {{x.name}}
                     </div>
                     <div class= "col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        {{x.weightLoss}}
+                        {{x.weightLoss}}   
+                        <span ng-show="x.name==currentUser && upOrDown>0">
+                            <i class="fa fa-plus" aria-hidden="true" style="color:FF9A00"></i>
+                        </span>
+                        <span ng-show="x.name==currentUser && upOrDown<0">
+                            <i class="fa fa-minus" aria-hidden="true" style="color:red"></i>  
+                        </span>
                     </div>
+                      
                         
-                </div><!--end of repeat row-->
+                </div><!--end of repeat row  && $scope.upOrDown>0-->
             </div><!--end of row container-->            
         </div><!--end of Ranking Page-->
         <div class= "col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="view=='weighInPage'"><!--start of Weight-Loss Weigh-In -->

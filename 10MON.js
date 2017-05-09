@@ -16,8 +16,11 @@ app.controller('monsterController', function($scope, $http, $filter){
         }/*end of j-loop*/     
     }
     
-    /*inital setting of app's information used the Ranking Page */
+    /*inital setting of app's userData information used the Ranking Page */
     $scope.getWeightLoss();
+    
+    /*inital setting of current user old weightLoss used the Ranking Page */    
+    $scope.currentWeightLoss = 0;
 
     /*add code for disabling nav if logIn do not return true*/
     $scope.setView = function(view){
@@ -30,7 +33,16 @@ app.controller('monsterController', function($scope, $http, $filter){
     /*retrieves the log-in page userName and create a global varible to track user.*/
     $scope.currentUser = "";
     
-    /*                                        Weight-In Codebase               */  
+  /*                                        Weight-In Codebase               */      
+    
+    
+    /*creates a number variable determine by the currentUser weightLoss and the weightLoss after weigh-In. This is used with ng-show weightScale to show plus or minus sign with weight change. */
+    $scope.upOrDown = 0;
+    
+    /*This function is used in the weighIn function. It takes the current user new weight loss minus the old weight loss into the upOrDown global varible. This is used to determine if a plus or minus signs is shown on the ranking page for the user.  */
+    $scope.getWeightScale = function(x){
+        $scope.upOrDown = x - $scope.currentWeightLoss
+    }/*end of getWeightScale function*/
     
     /*function attached to weighIn page submit button. Takes as parameters the current user input weigh variable (from inputWeighIn text-box) and currentUser global varibile from logIn. */
     $scope.weighIn = function(weight) {
@@ -41,12 +53,16 @@ app.controller('monsterController', function($scope, $http, $filter){
                     
                 $scope.userData[i].weightLoss = $scope.userData[i].startWeight - weight;
                     
+                $scope.getWeightScale($scope.userData[i].weightLoss);
+                        
                 break; /*force end of i-loop search for currentUser*/
 
                 }/*end of if statment*/
         }/*end of i-loop*/
         
         $scope.getWeightLoss();
+        $scope.setView('rankingPage');
+        
 
     }/*end of weighIn function*/
     /*                          End of Weigh-In Codebase               */    
@@ -71,6 +87,18 @@ app.controller('monsterController', function($scope, $http, $filter){
                     $scope.message = "Your UserName or Password has Failed";    
                 }
 }/*end of for i-loop*/ 
+
+    /*function attached to log-In page submit button taht gets the current user weightLoss informatoin*/
+    $scope.getCurrentWeightLoss = function(){
+        for(var i=0;i<$scope.newArray.length;i++){
+            if($scope.currentUser==$scope.newArray[i].name){
+                $scope.currentWeightLoss = $scope.newArray[i].weightLoss
+            }/*end of if statement*/
+        }/*end of i-loop*/
+    }/*end of getCurrentWeightLoss function*/
+    
+    /*inital setting of currentUser possible weight change using currentWeightLoss varible in getWeightScale function */
+    $scope.getCurrentWeightLoss();
 }/*end of for logIn Function*/ 
     /*                          End of Log-In Codebase               */    
 

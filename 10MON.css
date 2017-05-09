@@ -53,8 +53,6 @@ body {
     color: white;
 }
 
-
-
                                     /*BODY ELEMENTS CODE*/
 
 /* increase font size for ranking page information*/
@@ -79,4 +77,13 @@ p {
 }
 
 
+                                /*NG-CLASS CODE*/
 
+.highlightCurrentUser {
+    font-weight: bolder;
+    color: 073A7F;
+}
+
+.weightScalePlus {
+    
+}
