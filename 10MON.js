@@ -1,6 +1,9 @@
 var app = angular.module('myApp', ['ui.bootstrap']);
 
 app.controller('monsterController', function($scope, $http, $filter){
+    
+    /*                       Arrays & Database codeBase                                */
+    
     $scope.userData = [{"name":"Mary Runner", "startWeight":200, "weightLoss":0}, {"name":"Brand Lifter", "startWeight":182, "weightLoss":2.5}, {"name":"Chad Zumba", "startWeight":243, "weightLoss":4.8}, {"name":"Bria Zumba", "startWeight":143, "weightLoss":0.8}, {"name":"Dancing Monkey", "startWeight":183, "weightLoss":2.7}, {"name":"Swaying Elephant", "startWeight":443, "weightLoss":24.8}, {"name":"Flaming Flamingo", "startWeight":101, "weightLoss":0.6}, {"name":"Shiny Penguin", "startWeight":202, "weightLoss":14.8}, {"name":"Amazing Ant", "startWeight":3, "weightLoss":0.1}, {"name":"Tripping Zebra", "startWeight":306, "weightLoss":8.1}];
     
     $scope.cred = [{"name":"Mary Runner", "password":1}, {"name":"Brand Lifter", "password":2}, {"name":"Chad Zumba", "password":3}, {"name":"Bria Zumba", "password":4}, {"name":"Dancing Monkey", "password":5}, {"name":"Swaying Elephant", "password":6}, {"name":"Flaming Flamingo", "password":7}, {"name":"Shiny Penguin", "password":8}, {"name":"Amazing Ant", "password":9}, {"name":"Tripping Zebra", "password":10}];
@@ -8,6 +11,8 @@ app.controller('monsterController', function($scope, $http, $filter){
     $scope.inspiration = ["You are What you Eat, so don't be FAST, CHEAP,EASY, or FAKE", "My favorite exercise is a cross between a Lunge aND a Crunch. I call it LUNCH", "Dream Big, Work Hard, Stay Focused, and surround yourself with Good People", "Do NOT REWARD YOURSELF WITH FOOD, YOU'RE NOT A DOG","The trouble with trouble is it starts out as fun", "Some people feel they keep trying to lose weight, but it keeps finding them.", "Life expectancy would grow by leaps and bounds if green vegetables smelled as good as bacon","Next time someone asks you how much you weigh.. Tell them One Hundred and Sexy", "I ate healthy and exercised today. I better wake up Skinny.", "RUN, like Channing Tatum is waiting for you at the the finish line", "Hello! I'm the Fitness Fairy. I just sprinkled motivation dust on you. Now go and move your ass. This shit is expensive", "Exercise, EX..ER..CISE, EX..AR..SIZE, EGGS..ARE..SIDES, ...FOR BACON... BACON"     ];
 
     $scope.newArray = []; /*array populated with each userdata array element except the weight*/
+    
+    /*                      INITAL SETTING OF SHARDED DATA    */
     
     /* The userData array is placed into the newArray variable without the players weight */
     $scope.getWeightLoss = function(){
@@ -23,6 +28,9 @@ app.controller('monsterController', function($scope, $http, $filter){
     
     /*inital setting of current user old weightLoss used the Ranking Page */    
     $scope.currentWeightLoss = 0;
+    
+    /*inital setting of current Week into the challenge used the Ranking Page */ 
+    $scope.currentWeek = 0;
 
     /*add code for disabling nav if logIn do not return true*/
     $scope.setView = function(view){
@@ -34,6 +42,9 @@ app.controller('monsterController', function($scope, $http, $filter){
     
     /*retrieves the log-in page userName and create a global varible to track user.*/
     $scope.currentUser = "";
+    
+    /*start date of the challenge*/
+    $scope.startDate = new Date("4/29/2017");
     
     /*function to pick a random quote from inspiration databas each time the weighIn page is showned.  return Math.floor(Math.random()*(max-min+1)+min). Math.floor((Math.random() * 10) + 1);;*/
     $scope.getRandomQuote = function(){
@@ -69,7 +80,10 @@ app.controller('monsterController', function($scope, $http, $filter){
         
         /*used updated userData array to update newArray array that is used on the Ranking page*/
         $scope.getWeightLoss();
+        
+        /*updates teh currentWeightLoss varible in case user updates again*/
         $scope.getCurrentWeightLoss();
+        
         /*switch page view from weighIn page to ranking page*/
         $scope.setView('rankingPage');
         
@@ -96,9 +110,9 @@ app.controller('monsterController', function($scope, $http, $filter){
                 {
                     $scope.message = "Your UserName or Password has Failed";    
                 }
-}/*end of for i-loop*/ 
+        }/*end of for i-loop*/ 
 
-    /*function attached to log-In page submit button taht gets the current user weightLoss informatoin*/
+    /*function attached to log-In page submit button that gets the current user weightLoss informatoin*/
     $scope.getCurrentWeightLoss = function(){
         for(var i=0;i<$scope.newArray.length;i++){
             if($scope.currentUser==$scope.newArray[i].name){
@@ -109,6 +123,23 @@ app.controller('monsterController', function($scope, $http, $filter){
     
     /*inital setting of currentUser possible weight change using currentWeightLoss varible in getWeightScale function */
     $scope.getCurrentWeightLoss();
+        
+    /*get current date of log-In*/
+    $scope.currentDate = new Date();
+        
+    /*function to get the current week into the challenge since the start Date, set with startDate variable, minus the current Date. This amount is placed in numberOfDays variable then divide by 7 to get currentWeek. The solution to the problem was found at http://stackoverflow.com/questions/2627473/how-to-calculate-the-number-of-days-between-two-dates-using-javascript  */
+    $scope.getCurrentWeekNumber = function(){
+        var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds, total miliseconds in a day
+        /*Used the date.getTime() to get and subtract the milliseconds of startDate and currentDate. This is divided by the oneDay variable and rounded (Math.round) to the nearest Interger turned positive (Math.abs)*/
+        $scope.numberOfDays = Math.round(Math.abs(($scope.currentDate.getTime() - $scope.startDate.getTime())/(oneDay)));
+        if($scope.numberOfDays <= 7)
+            $scope.currentWeek = 1; /*If challenge just started, it will output 1 instead of 0*/
+        else
+            $scope.currentWeek = Math.round($scope.numberOfDays/7);/*round to nearest Interger the number of Days divided by 7*/
+    } /*End of getCurrentWeekNumber function*/
+    
+    $scope.getCurrentWeekNumber();
+        
 }/*end of for logIn Function*/ 
     /*                          End of Log-In Codebase               */    
 

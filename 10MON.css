@@ -76,6 +76,12 @@ p {
     font-size: 120%;    
 }
 
+/* almost black font color for all text but the nav.*/
+h3 {
+    text-align: center;
+    color: 333333;    
+}
+
 
                                 /*NG-CLASS CODE*/
 
