@@ -36,7 +36,7 @@
             </div>
             <!--Nav Link to Weigh-In Page -->
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <a href="#" class="btn btn-link" role="button" ng-click="setView('weighInPage')"><h4>Weigh-In</h4></a>
+                <a href="#" class="btn btn-link" role="button" ng-click="setView('weighInPage'); getRandomQuote()"><h4>Weigh-In</h4></a>
             </div> 
         </div>
     </div>
@@ -106,7 +106,7 @@
                         <h4>Player Name</h4>
                     </div><!--end of Player Name title-->
                     <div class= "col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <h4>Weight Loss</h4>
+                        <h4>Total Weight Loss</h4>
                     </div><!--end of Weight loss title-->
                 </div>    
                 <div class="row rankingFontSize" ng-repeat="x in newArray | orderBy:'-weightLoss'" ng-class="{'highlightCurrentUser':x.name==currentUser}">
@@ -120,13 +120,13 @@
                     <div class= "col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         {{x.weightLoss}}   
                         <span ng-show="x.name==currentUser && upOrDown>0">
-                            <i class="fa fa-plus" aria-hidden="true" style="color:FF9A00"></i>
+                            <i class="fa fa-plus" aria-hidden="true" style="color:1BAD83">{{upOrDown}}</i>
                         </span>
-                        <span ng-show="x.name==currentUser && upOrDown<0">
-                            <i class="fa fa-minus" aria-hidden="true" style="color:red"></i>  
+                        <span ng-show="x.name==currentUser && upOrDown<0" style="color:red">
+                            {{upOrDown}}  
                         </span>
                     </div>
-                      
+<!--<i class="fa fa-minus" aria-hidden="true" style="color:red"></i>-->                      
                         
                 </div><!--end of repeat row  && $scope.upOrDown>0-->
             </div><!--end of row container-->            
@@ -156,10 +156,9 @@
             </form>
             <div class= "col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <br><br>
-                <h4>Inspiration</h4>
-                <p>
-                Anyone looking to lose weight could be helped by upping their water intake. Studies have found that when participants drink water before a meal, they lose weight faster than those who did not drink water  . Extra H2O helps us eat less by making us feel full, and it may also boost metabolism. 
-                </p>
+                <h4>Random Inspirational Quote of the Day</h4>
+
+                <p>{{randomQuote}}</p>
             </div>
 
         </div><!--end of Weigh-In Page-->
