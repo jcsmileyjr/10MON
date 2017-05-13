@@ -1,9 +1,11 @@
 var app = angular.module('myApp', ['ui.bootstrap']);
 
 app.controller('monsterController', function($scope, $http, $filter){
-    $scope.userData = [{"name":"Mary Runner", "startWeight":200, "weightLoss":6}, {"name":"Brand Lifter", "startWeight":182, "weightLoss":2.5}, {"name":"Chad Zumba", "startWeight":243, "weightLoss":4.8}, {"name":"Bria Zumba", "startWeight":143, "weightLoss":0.8}, {"name":"Dancing Monkey", "startWeight":183, "weightLoss":2.7}, {"name":"Swaying Elephant", "startWeight":443, "weightLoss":24.8}, {"name":"Flaming Flamingo", "startWeight":101, "weightLoss":0.6}, {"name":"Shiny Penguin", "startWeight":202, "weightLoss":14.8}, {"name":"Amazing Ant", "startWeight":3, "weightLoss":0.1}, {"name":"Tripping Zebra", "startWeight":306, "weightLoss":8.1}];
+    $scope.userData = [{"name":"Mary Runner", "startWeight":200, "weightLoss":0}, {"name":"Brand Lifter", "startWeight":182, "weightLoss":2.5}, {"name":"Chad Zumba", "startWeight":243, "weightLoss":4.8}, {"name":"Bria Zumba", "startWeight":143, "weightLoss":0.8}, {"name":"Dancing Monkey", "startWeight":183, "weightLoss":2.7}, {"name":"Swaying Elephant", "startWeight":443, "weightLoss":24.8}, {"name":"Flaming Flamingo", "startWeight":101, "weightLoss":0.6}, {"name":"Shiny Penguin", "startWeight":202, "weightLoss":14.8}, {"name":"Amazing Ant", "startWeight":3, "weightLoss":0.1}, {"name":"Tripping Zebra", "startWeight":306, "weightLoss":8.1}];
     
     $scope.cred = [{"name":"Mary Runner", "password":1}, {"name":"Brand Lifter", "password":2}, {"name":"Chad Zumba", "password":3}, {"name":"Bria Zumba", "password":4}, {"name":"Dancing Monkey", "password":5}, {"name":"Swaying Elephant", "password":6}, {"name":"Flaming Flamingo", "password":7}, {"name":"Shiny Penguin", "password":8}, {"name":"Amazing Ant", "password":9}, {"name":"Tripping Zebra", "password":10}];
+    
+    $scope.inspiration = ["You are What you Eat, so don't be FAST, CHEAP,EASY, or FAKE", "My favorite exercise is a cross between a Lunge aND a Crunch. I call it LUNCH", "Dream Big, Work Hard, Stay Focused, and surround yourself with Good People", "Do NOT REWARD YOURSELF WITH FOOD, YOU'RE NOT A DOG","The trouble with trouble is it starts out as fun", "Some people feel they keep trying to lose weight, but it keeps finding them.", "Life expectancy would grow by leaps and bounds if green vegetables smelled as good as bacon","Next time someone asks you how much you weigh.. Tell them One Hundred and Sexy", "I ate healthy and exercised today. I better wake up Skinny.", "RUN, like Channing Tatum is waiting for you at the the finish line", "Hello! I'm the Fitness Fairy. I just sprinkled motivation dust on you. Now go and move your ass. This shit is expensive", "Exercise, EX..ER..CISE, EX..AR..SIZE, EGGS..ARE..SIDES, ...FOR BACON... BACON"     ];
 
     $scope.newArray = []; /*array populated with each userdata array element except the weight*/
     
@@ -33,6 +35,10 @@ app.controller('monsterController', function($scope, $http, $filter){
     /*retrieves the log-in page userName and create a global varible to track user.*/
     $scope.currentUser = "";
     
+    /*function to pick a random quote from inspiration databas each time the weighIn page is showned.  return Math.floor(Math.random()*(max-min+1)+min). Math.floor((Math.random() * 10) + 1);;*/
+    $scope.getRandomQuote = function(){
+        $scope.randomQuote = $scope.inspiration[Math.floor((Math.random() * $scope.inspiration.length-1 ) + 1)];
+    }
   /*                                        Weight-In Codebase               */      
     
     
@@ -52,7 +58,8 @@ app.controller('monsterController', function($scope, $http, $filter){
                 if($scope.currentUser==$scope.userData[i].name){  /*checks each element for a match */
                     
                 $scope.userData[i].weightLoss = $scope.userData[i].startWeight - weight;
-                    
+                
+                /*determine if currentUser new weight is positive or negative. This tell the app to place a plus or minus on the currentUser ranking page row. */    
                 $scope.getWeightScale($scope.userData[i].weightLoss);
                         
                 break; /*force end of i-loop search for currentUser*/
@@ -60,7 +67,10 @@ app.controller('monsterController', function($scope, $http, $filter){
                 }/*end of if statment*/
         }/*end of i-loop*/
         
+        /*used updated userData array to update newArray array that is used on the Ranking page*/
         $scope.getWeightLoss();
+        $scope.getCurrentWeightLoss();
+        /*switch page view from weighIn page to ranking page*/
         $scope.setView('rankingPage');
         
 
