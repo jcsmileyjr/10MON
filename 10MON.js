@@ -8,7 +8,7 @@ app.controller('monsterController', function($scope, $http, $filter){
     
     $scope.cred = [{"name":"Mary Runner", "password":1}, {"name":"Brand Lifter", "password":2}, {"name":"Chad Zumba", "password":3}, {"name":"Bria Zumba", "password":4}, {"name":"Dancing Monkey", "password":5}, {"name":"Swaying Elephant", "password":6}, {"name":"Flaming Flamingo", "password":7}, {"name":"Shiny Penguin", "password":8}, {"name":"Amazing Ant", "password":9}, {"name":"Tripping Zebra", "password":10}];
     
-    $scope.inspiration = ["You are What you Eat, so don't be FAST, CHEAP,EASY, or FAKE", "My favorite exercise is a cross between a Lunge aND a Crunch. I call it LUNCH", "Dream Big, Work Hard, Stay Focused, and surround yourself with Good People", "Do NOT REWARD YOURSELF WITH FOOD, YOU'RE NOT A DOG","The trouble with trouble is it starts out as fun", "Some people feel they keep trying to lose weight, but it keeps finding them.", "Life expectancy would grow by leaps and bounds if green vegetables smelled as good as bacon","Next time someone asks you how much you weigh.. Tell them One Hundred and Sexy", "I ate healthy and exercised today. I better wake up Skinny.", "RUN, like Channing Tatum is waiting for you at the the finish line", "Hello! I'm the Fitness Fairy. I just sprinkled motivation dust on you. Now go and move your ass. This shit is expensive", "Exercise, EX..ER..CISE, EX..AR..SIZE, EGGS..ARE..SIDES, ...FOR BACON... BACON"     ];
+    $scope.inspiration = ["You are What you Eat, so don't be FAST, CHEAP, EASY, or FAKE", "My favorite exercise is a cross between a Lunge and a Crunch. I call it LUNCH", "Dream Big, Work Hard, Stay Focused, and surround yourself with Good People", "Do NOT REWARD YOURSELF WITH FOOD, YOU'RE NOT A DOG","The trouble with trouble is it starts out as fun", "Some people feel they keep trying to lose weight, but it keeps finding them.", "Life expectancy would grow by leaps and bounds if green vegetables smelled as good as bacon","Next time someone asks you how much you weigh.. Tell them One Hundred and Sexy", "I ate healthy and exercised today. I better wake up Skinny.", "RUN, like Channing Tatum is waiting for you at the the finish line", "Hello! I'm the Fitness Fairy. I just sprinkled motivation dust on you. Now go and move your ass. This shit is expensive", "Exercise, EX..ER..CISE, EX..AR..SIZE, EGGS..ARE..SIDES, ...FOR BACON... BACON"     ];
 
     $scope.newArray = []; /*array populated with each userdata array element except the weight*/
     
@@ -45,13 +45,12 @@ app.controller('monsterController', function($scope, $http, $filter){
     
     /*start date of the challenge*/
     $scope.startDate = new Date("4/29/2017");
+    /*                                        Weight-In Codebase               */      
     
     /*function to pick a random quote from inspiration databas each time the weighIn page is showned.  return Math.floor(Math.random()*(max-min+1)+min). Math.floor((Math.random() * 10) + 1);;*/
     $scope.getRandomQuote = function(){
         $scope.randomQuote = $scope.inspiration[Math.floor((Math.random() * $scope.inspiration.length-1 ) + 1)];
     }
-  /*                                        Weight-In Codebase               */      
-    
     
     /*creates a number variable determine by the currentUser weightLoss and the weightLoss after weigh-In. This is used with ng-show weightScale to show plus or minus sign with weight change. */
     $scope.upOrDown = 0;
@@ -102,7 +101,7 @@ app.controller('monsterController', function($scope, $http, $filter){
         for(var i=0; i<$scope.cred.length;i++){
             if(userName==$scope.cred[i].name && pwd==$scope.cred[i].password)
                 {
-                    $scope.setView('rankingPage');
+                    $scope.setView('weighInPage');
                                 
                 }
 

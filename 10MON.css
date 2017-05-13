@@ -1,6 +1,6 @@
                                     /*NAVIGATION Code*/
 /*centers the page titles and nav app title*/
-h1, h2 {
+h1, h2, .centerAlign {
     text-align: center;
 }
 
@@ -82,6 +82,13 @@ h3 {
     color: 333333;    
 }
 
+.redColor {
+    color: red;
+}
+
+.leftAlign {
+    text-align: left;
+}
 
                                 /*NG-CLASS CODE*/
 
