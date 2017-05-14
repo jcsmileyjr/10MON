@@ -18,8 +18,11 @@ app.controller('monsterController', function($scope, $http, $filter){
     $scope.getWeightLoss = function(){
         /*loops throught the userData array*/
         for(var j=0; j<$scope.userData.length;j++){
-            /*myArray variable is populated with each user array element except the weight*/
-            $scope.newArray[j]= {"name":$scope.userData[j].name, "weightLoss":$scope.userData[j].weightLoss};  
+            /*divides current userData array elment weightloss by the startWeight to get percentage lost*/
+            $scope.currentPercentLoss = $scope.userData[j].weightLoss / $scope.userData[j].startWeight;
+            
+            /*myArray variable is populated with each user array element plus percent loss and except the weight*/
+            $scope.newArray[j]= {"name":$scope.userData[j].name, "weightLoss":$scope.userData[j].weightLoss, "percentLoss":$scope.currentPercentLoss};  
         }/*end of j-loop*/     
     }
     
@@ -44,7 +47,10 @@ app.controller('monsterController', function($scope, $http, $filter){
     $scope.currentUser = "";
     
     /*start date of the challenge*/
-    $scope.startDate = new Date("4/29/2017");
+    $scope.startDate = new Date("4/8/2017");
+    
+    /*inital setting of Ranking page percentage or pounds checkbox */
+    $scope.percentOrPounds = false;
     /*                                        Weight-In Codebase               */      
     
     /*function to pick a random quote from inspiration databas each time the weighIn page is showned.  return Math.floor(Math.random()*(max-min+1)+min). Math.floor((Math.random() * 10) + 1);;*/
@@ -102,6 +108,7 @@ app.controller('monsterController', function($scope, $http, $filter){
             if(userName==$scope.cred[i].name && pwd==$scope.cred[i].password)
                 {
                     $scope.setView('weighInPage');
+                    $scope.getRandomQuote();
                                 
                 }
 
@@ -138,7 +145,8 @@ app.controller('monsterController', function($scope, $http, $filter){
     } /*End of getCurrentWeekNumber function*/
     
     $scope.getCurrentWeekNumber();
-        
+    
+
 }/*end of for logIn Function*/ 
     /*                          End of Log-In Codebase               */    
 
