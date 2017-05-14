@@ -4,13 +4,23 @@ app.controller('monsterController', function($scope, $http, $filter){
     
     /*                       Arrays & Database codeBase                                */
     
-    $scope.userData = [{"name":"Mary Runner", "startWeight":200, "weightLoss":0}, {"name":"Brand Lifter", "startWeight":180, "weightLoss":0}, {"name":"Chad Zumba", "startWeight":243, "weightLoss":4.8}, {"name":"Bria Zumba", "startWeight":143, "weightLoss":0.8}, {"name":"Dancing Monkey", "startWeight":183, "weightLoss":2.7}, {"name":"Swaying Elephant", "startWeight":443, "weightLoss":24.8}, {"name":"Flaming Flamingo", "startWeight":101, "weightLoss":0.6}, {"name":"Shiny Penguin", "startWeight":202, "weightLoss":0}, {"name":"Amazing Ant", "startWeight":3, "weightLoss":0.1}, {"name":"Tripping Zebra", "startWeight":306, "weightLoss":8.1}];
+        
+    /*start date of the challenge*/
+    $scope.startDate = new Date("4/8/2017");
+    
+    $scope.userData = [{"name":"Mary Runner", "startWeight":200, "weightLoss":0, "lastUpdate":$scope.startDate}, {"name":"Brand Lifter", "startWeight":180, "weightLoss":0, "lastUpdate":$scope.startDate}, {"name":"Chad Zumba", "startWeight":243, "weightLoss":4.8, "lastUpdate":$scope.startDate}, {"name":"Bria Zumba", "startWeight":143, "weightLoss":0.8, "lastUpdate":$scope.startDate}, {"name":"Dancing Monkey", "startWeight":183, "weightLoss":2.7, "lastUpdate":$scope.startDate}, {"name":"Swaying Elephant", "startWeight":443, "weightLoss":24.8, "lastUpdate":$scope.startDate}, {"name":"Flaming Flamingo", "startWeight":101, "weightLoss":0.6, "lastUpdate":$scope.startDate}, {"name":"Shiny Penguin", "startWeight":202, "weightLoss":0, "lastUpdate":$scope.startDate}, {"name":"Amazing Ant", "startWeight":3, "weightLoss":0.1, "lastUpdate":$scope.startDate}, {"name":"Tripping Zebra", "startWeight":306, "weightLoss":8.1, "lastUpdate":$scope.startDate}];
     
     $scope.cred = [{"name":"Mary Runner", "password":1}, {"name":"Brand Lifter", "password":2}, {"name":"Chad Zumba", "password":3}, {"name":"Bria Zumba", "password":4}, {"name":"Dancing Monkey", "password":5}, {"name":"Swaying Elephant", "password":6}, {"name":"Flaming Flamingo", "password":7}, {"name":"Shiny Penguin", "password":8}, {"name":"Amazing Ant", "password":9}, {"name":"Tripping Zebra", "password":10}];
     
     $scope.inspiration = ["You are What you Eat, so don't be FAST, CHEAP, EASY, or FAKE", "My favorite exercise is a cross between a Lunge and a Crunch. I call it LUNCH", "Dream Big, Work Hard, Stay Focused, and surround yourself with Good People", "Do NOT REWARD YOURSELF WITH FOOD, YOU'RE NOT A DOG","The trouble with trouble is it starts out as fun", "Some people feel they keep trying to lose weight, but it keeps finding them.", "Life expectancy would grow by leaps and bounds if green vegetables smelled as good as bacon","Next time someone asks you how much you weigh.. Tell them One Hundred and Sexy", "I ate healthy and exercised today. I better wake up Skinny.", "RUN, like Channing Tatum is waiting for you at the the finish line", "Hello! I'm the Fitness Fairy. I just sprinkled motivation dust on you. Now go and move your ass. This shit is expensive", "Exercise, EX..ER..CISE, EX..AR..SIZE, EGGS..ARE..SIDES, ...FOR BACON... BACON"     ];
 
     $scope.newArray = []; /*array populated with each userdata array element except the weight*/
+    
+    /*get the inital setting for today's date*/
+    $scope.UpdateDate = new Date();
+
+    
+    $scope.oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds, total miliseconds in a day
     
     /*                      INITAL SETTING OF SHARDED DATA    */
     
@@ -20,9 +30,11 @@ app.controller('monsterController', function($scope, $http, $filter){
         for(var j=0; j<$scope.userData.length;j++){
             /*divides current userData array elment weightloss by the startWeight to get percentage lost*/
             $scope.currentPercentLoss = $scope.userData[j].weightLoss / $scope.userData[j].startWeight;
+                                
+            $scope.daysSinceLastUpdate = Math.round(Math.abs(($scope.UpdateDate.getTime() - $scope.userData[j].lastUpdate.getTime())/($scope.oneDay))); 
             
             /*myArray variable is populated with each user array element plus percent loss and except the weight*/
-            $scope.newArray[j]= {"name":$scope.userData[j].name, "weightLoss":$scope.userData[j].weightLoss, "percentLoss":$scope.currentPercentLoss};  
+            $scope.newArray[j]= {"name":$scope.userData[j].name, "weightLoss":$scope.userData[j].weightLoss, "percentLoss":$scope.currentPercentLoss, "lastUpdate": $scope.daysSinceLastUpdate};  
         }/*end of j-loop*/     
     }
     
@@ -46,8 +58,7 @@ app.controller('monsterController', function($scope, $http, $filter){
     /*retrieves the log-in page userName and create a global varible to track user.*/
     $scope.currentUser = "";
     
-    /*start date of the challenge*/
-    $scope.startDate = new Date("4/8/2017");
+
     
     /*inital setting of Ranking page percentage or pounds checkbox */
     $scope.percentOrPounds = false;
@@ -57,8 +68,11 @@ app.controller('monsterController', function($scope, $http, $filter){
     /*function attached to SetUp page submit button. Takes as parameters the inputted name, password, and start weight variables (from inputName, inputSetupPwd, and inputStartWeight text-box) */    
     $scope.newPlayer = function(name, setUpPwd, setUpWeight){
         
+        /*get today's date*/
+        $scope.newUpdateDate = new Date();
+        
         /*creates a player object that takes the function's parameters*/
-        $scope.player = {"name":$scope.name, "startWeight":$scope.setUpWeight, "weightLoss":0};
+        $scope.player = {"name":$scope.name, "startWeight":$scope.setUpWeight, "weightLoss":0, "lastUpdate":$scope.newUpdateDate};
         
         /*pushes the new player object into the userData database*/
         $scope.userData.push($scope.player);
@@ -79,7 +93,7 @@ app.controller('monsterController', function($scope, $http, $filter){
     
 
     
-    /*                                        Weight-In Codebase               */      
+    /*                                      Weight-In Codebase               */      
     
     /*function to pick a random quote from inspiration databas each time the weighIn page is showned.  return Math.floor(Math.random()*(max-min+1)+min). Math.floor((Math.random() * 10) + 1);;*/
     $scope.getRandomQuote = function(){
@@ -100,11 +114,15 @@ app.controller('monsterController', function($scope, $http, $filter){
         /*This for loop searches through the users array of objects for a name match. If there is a name match, the weight parameter is subtracted from the startWeight to create a new weightLoss for the matched array element. Using teh getWeightLoss method, the updated users array is placed into the myArray variable without the players weight and sent to the controller to update the Player Ranking Page.*/
         for(var i=0; i<$scope.userData.length;i++){
                 if($scope.currentUser==$scope.userData[i].name){  /*checks each element for a match */
-                    
+                
+                /*sets the new weightLoss attribute for the current user*/    
                 $scope.userData[i].weightLoss = $scope.userData[i].startWeight - weight;
                 
                 /*determine if currentUser new weight is positive or negative. This tell the app to place a plus or minus on the currentUser ranking page row. */    
                 $scope.getWeightScale($scope.userData[i].weightLoss);
+                    
+                /*resets current user lastUpdate attribute*/    
+                $scope.userData[i].lastUpdate = $scope.UpdateDate;
                         
                 break; /*force end of i-loop search for currentUser*/
 
@@ -114,7 +132,7 @@ app.controller('monsterController', function($scope, $http, $filter){
         /*used updated userData array to update newArray array that is used on the Ranking page*/
         $scope.getWeightLoss();
         
-        /*updates teh currentWeightLoss varible in case user updates again*/
+        /*updates the currentWeightLoss variable in case user updates again*/
         $scope.getCurrentWeightLoss();
         
         /*switch page view from weighIn page to ranking page*/
@@ -163,9 +181,9 @@ app.controller('monsterController', function($scope, $http, $filter){
         
     /*function to get the current week into the challenge since the start Date, set with startDate variable, minus the current Date. This amount is placed in numberOfDays variable then divide by 7 to get currentWeek. The solution to the problem was found at http://stackoverflow.com/questions/2627473/how-to-calculate-the-number-of-days-between-two-dates-using-javascript  */
     $scope.getCurrentWeekNumber = function(){
-        var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds, total miliseconds in a day
+        
         /*Used the date.getTime() to get and subtract the milliseconds of startDate and currentDate. This is divided by the oneDay variable and rounded (Math.round) to the nearest Interger turned positive (Math.abs)*/
-        $scope.numberOfDays = Math.round(Math.abs(($scope.currentDate.getTime() - $scope.startDate.getTime())/(oneDay)));
+        $scope.numberOfDays = Math.round(Math.abs(($scope.currentDate.getTime() - $scope.startDate.getTime())/($scope.oneDay)));
         if($scope.numberOfDays <= 7)
             $scope.currentWeek = 1; /*If challenge just started, it will output 1 instead of 0*/
         else

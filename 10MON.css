@@ -94,6 +94,10 @@ h3 {
     text-align: center;
 }
 
+.smallFont {
+    font-size: 70%;
+}
+
                                 /*NG-CLASS CODE*/
 
 .highlightCurrentUser {
