@@ -4,7 +4,7 @@ app.controller('monsterController', function($scope, $http, $filter){
     
     /*                       Arrays & Database codeBase                                */
     
-    $scope.userData = [{"name":"Mary Runner", "startWeight":200, "weightLoss":0}, {"name":"Brand Lifter", "startWeight":182, "weightLoss":2.5}, {"name":"Chad Zumba", "startWeight":243, "weightLoss":4.8}, {"name":"Bria Zumba", "startWeight":143, "weightLoss":0.8}, {"name":"Dancing Monkey", "startWeight":183, "weightLoss":2.7}, {"name":"Swaying Elephant", "startWeight":443, "weightLoss":24.8}, {"name":"Flaming Flamingo", "startWeight":101, "weightLoss":0.6}, {"name":"Shiny Penguin", "startWeight":202, "weightLoss":14.8}, {"name":"Amazing Ant", "startWeight":3, "weightLoss":0.1}, {"name":"Tripping Zebra", "startWeight":306, "weightLoss":8.1}];
+    $scope.userData = [{"name":"Mary Runner", "startWeight":200, "weightLoss":0}, {"name":"Brand Lifter", "startWeight":180, "weightLoss":0}, {"name":"Chad Zumba", "startWeight":243, "weightLoss":4.8}, {"name":"Bria Zumba", "startWeight":143, "weightLoss":0.8}, {"name":"Dancing Monkey", "startWeight":183, "weightLoss":2.7}, {"name":"Swaying Elephant", "startWeight":443, "weightLoss":24.8}, {"name":"Flaming Flamingo", "startWeight":101, "weightLoss":0.6}, {"name":"Shiny Penguin", "startWeight":202, "weightLoss":0}, {"name":"Amazing Ant", "startWeight":3, "weightLoss":0.1}, {"name":"Tripping Zebra", "startWeight":306, "weightLoss":8.1}];
     
     $scope.cred = [{"name":"Mary Runner", "password":1}, {"name":"Brand Lifter", "password":2}, {"name":"Chad Zumba", "password":3}, {"name":"Bria Zumba", "password":4}, {"name":"Dancing Monkey", "password":5}, {"name":"Swaying Elephant", "password":6}, {"name":"Flaming Flamingo", "password":7}, {"name":"Shiny Penguin", "password":8}, {"name":"Amazing Ant", "password":9}, {"name":"Tripping Zebra", "password":10}];
     
@@ -51,6 +51,34 @@ app.controller('monsterController', function($scope, $http, $filter){
     
     /*inital setting of Ranking page percentage or pounds checkbox */
     $scope.percentOrPounds = false;
+    
+    /*                              Join Challenge Codebase                    */
+
+    /*function attached to SetUp page submit button. Takes as parameters the inputted name, password, and start weight variables (from inputName, inputSetupPwd, and inputStartWeight text-box) */    
+    $scope.newPlayer = function(name, setUpPwd, setUpWeight){
+        
+        /*creates a player object that takes the function's parameters*/
+        $scope.player = {"name":$scope.name, "startWeight":$scope.setUpWeight, "weightLoss":0};
+        
+        /*pushes the new player object into the userData database*/
+        $scope.userData.push($scope.player);
+        
+        /*creates a new player log-in name and pwd object*/
+        $scope.playerCred = {"name":$scope.name, "password":$scope.setUpPwd};
+        
+        /*pushes the new player log-in object into the cred database*/
+        $scope.cred.push($scope.playerCred);
+        
+        /*uses updated userData array to update newArray array that is used on the Ranking page*/        
+        $scope.getWeightLoss();
+        
+        /*switch page view from Join Challenge to Ranking page*/
+        $scope.setView('rankingPage');
+        
+    }
+    
+
+    
     /*                                        Weight-In Codebase               */      
     
     /*function to pick a random quote from inspiration databas each time the weighIn page is showned.  return Math.floor(Math.random()*(max-min+1)+min). Math.floor((Math.random() * 10) + 1);;*/
