@@ -36,7 +36,20 @@ app.controller('monsterController', function($scope, $http, $filter){
             /*myArray variable is populated with each user array element plus percent loss and except the weight*/
             $scope.newArray[j]= {"name":$scope.userData[j].name, "weightLoss":$scope.userData[j].weightLoss, "percentLoss":$scope.currentPercentLoss, "lastUpdate": $scope.daysSinceLastUpdate};  
         }/*end of j-loop*/     
-    }
+    }/* end of getWeightLoss function*/
+    
+    /*function to get the current week into the challenge since the start Date, set with startDate variable, minus the current Date. This amount is placed in numberOfDays variable then divide by 7 to get currentWeek. The solution to the problem was found at http://stackoverflow.com/questions/2627473/how-to-calculate-the-number-of-days-between-two-dates-using-javascript  */
+    $scope.getCurrentWeekNumber = function(){
+        /*get current date of log-In*/
+        $scope.currentDate = new Date();        
+        
+        /*Used the date.getTime() to get and subtract the milliseconds of startDate and currentDate. This is divided by the oneDay variable and rounded (Math.round) to the nearest Interger turned positive (Math.abs)*/
+        $scope.numberOfDays = Math.round(Math.abs(($scope.currentDate.getTime() - $scope.startDate.getTime())/($scope.oneDay)));
+        if($scope.numberOfDays <= 7)
+            $scope.currentWeek = 1; /*If challenge just started, it will output 1 instead of 0*/
+        else
+            $scope.currentWeek = Math.round($scope.numberOfDays/7);/*round to nearest Interger the number of Days divided by 7*/
+    } /*End of getCurrentWeekNumber function*/    
     
     /*inital setting of app's userData information used the Ranking Page */
     $scope.getWeightLoss();
@@ -46,11 +59,29 @@ app.controller('monsterController', function($scope, $http, $filter){
     
     /*inital setting of current Week into the challenge used the Ranking Page */ 
     $scope.currentWeek = 0;
+    
+    /*disable the nav links when the app starts. Forces user to use the login page*/
+    $scope.enableNav = false;
+    
+    $scope.joinChallenge = function(join){
+        $scope.join = join;
+        $scope.view = "setUpPage";
+    }    
 
-    /*add code for disabling nav if logIn do not return true*/
+    /*function to toggle the Weigh-In and Ranking pages using the nav. Each html page div have the ng-show set to a view variable. The nav links run the setView method with the same ng-show variable.*/
     $scope.setView = function(view){
+        
+        if($scope.enableNav==true){
+        /*the varible view is set to the ng-show in each view*/
         $scope.view = view;
-    }
+        
+        }/*end of if statment*/       
+        else {
+            $scope.view = "logInPage";
+            $scope.join = "join";
+            
+        }
+    }/*end of setView function*/   
     
     /*the starting page is set to the login page */
     $scope.setView('logInPage');
@@ -58,10 +89,17 @@ app.controller('monsterController', function($scope, $http, $filter){
     /*retrieves the log-in page userName and create a global varible to track user.*/
     $scope.currentUser = "";
     
-
-    
     /*inital setting of Ranking page percentage or pounds checkbox */
     $scope.percentOrPounds = false;
+    
+    /*function attached to log-In page submit button that gets the current user weightLoss informatoin*/
+    $scope.getCurrentWeightLoss = function(){
+        for(var i=0;i<$scope.newArray.length;i++){
+            if($scope.currentUser==$scope.newArray[i].name){
+                $scope.currentWeightLoss = $scope.newArray[i].weightLoss
+            }/*end of if statement*/
+        }/*end of i-loop*/
+    }/*end of getCurrentWeightLoss function*/    
     
     /*                              Join Challenge Codebase                    */
 
@@ -86,14 +124,24 @@ app.controller('monsterController', function($scope, $http, $filter){
         /*uses updated userData array to update newArray array that is used on the Ranking page*/        
         $scope.getWeightLoss();
         
+        $scope.enableNav = true;
+        
+        $scope.join = "join";
+        
+        /*takes the startDate of the challenge minus today date divide by 7 to get how many weeks into the challenge*/
+        $scope.getCurrentWeekNumber();
+        
+        /*sets the userName as a global varible currentUser*/
+        $scope.currentUser = $scope.name;        
+        
         /*switch page view from Join Challenge to Ranking page*/
         $scope.setView('rankingPage');
         
-    }
+    }/*                         End of Join Challenge Codebase*/
     
 
     
-    /*                                      Weight-In Codebase               */      
+    /*                                      Weigh-In Codebase               */      
     
     /*function to pick a random quote from inspiration databas each time the weighIn page is showned.  return Math.floor(Math.random()*(max-min+1)+min). Math.floor((Math.random() * 10) + 1);;*/
     $scope.getRandomQuote = function(){
@@ -146,13 +194,14 @@ app.controller('monsterController', function($scope, $http, $filter){
     
     /*function attached to log-In page submit button. Takes as parameters the current userName variable (from logIn page) and pwd variable (from logIn page) to insert into logInformation array. This array is sent to the logIn.php.*/
     $scope.logIn = function(userName, pwd) {
-        /*sets teh userName as a global varible currentUser*/
+        /*sets the userName as a global varible currentUser*/
         $scope.currentUser = userName;
 
         /*This loop searchs the security array. A if statement compare user’s pwd and userName to cred json records. If found to be true, the newArray is return to the controller.*/
         for(var i=0; i<$scope.cred.length;i++){
             if(userName==$scope.cred[i].name && pwd==$scope.cred[i].password)
                 {
+                    $scope.enableNav = true;
                     $scope.setView('weighInPage');
                     $scope.getRandomQuote();
                                 
@@ -164,32 +213,10 @@ app.controller('monsterController', function($scope, $http, $filter){
                 }
         }/*end of for i-loop*/ 
 
-    /*function attached to log-In page submit button that gets the current user weightLoss informatoin*/
-    $scope.getCurrentWeightLoss = function(){
-        for(var i=0;i<$scope.newArray.length;i++){
-            if($scope.currentUser==$scope.newArray[i].name){
-                $scope.currentWeightLoss = $scope.newArray[i].weightLoss
-            }/*end of if statement*/
-        }/*end of i-loop*/
-    }/*end of getCurrentWeightLoss function*/
-    
     /*inital setting of currentUser possible weight change using currentWeightLoss varible in getWeightScale function */
     $scope.getCurrentWeightLoss();
-        
-    /*get current date of log-In*/
-    $scope.currentDate = new Date();
-        
-    /*function to get the current week into the challenge since the start Date, set with startDate variable, minus the current Date. This amount is placed in numberOfDays variable then divide by 7 to get currentWeek. The solution to the problem was found at http://stackoverflow.com/questions/2627473/how-to-calculate-the-number-of-days-between-two-dates-using-javascript  */
-    $scope.getCurrentWeekNumber = function(){
-        
-        /*Used the date.getTime() to get and subtract the milliseconds of startDate and currentDate. This is divided by the oneDay variable and rounded (Math.round) to the nearest Interger turned positive (Math.abs)*/
-        $scope.numberOfDays = Math.round(Math.abs(($scope.currentDate.getTime() - $scope.startDate.getTime())/($scope.oneDay)));
-        if($scope.numberOfDays <= 7)
-            $scope.currentWeek = 1; /*If challenge just started, it will output 1 instead of 0*/
-        else
-            $scope.currentWeek = Math.round($scope.numberOfDays/7);/*round to nearest Interger the number of Days divided by 7*/
-    } /*End of getCurrentWeekNumber function*/
     
+    /*takes the startDate of the challenge minus today date divide by 7 to get how many weeks into the challenge*/
     $scope.getCurrentWeekNumber();
     
 
