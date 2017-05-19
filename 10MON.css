@@ -46,7 +46,6 @@ input {
 /* background color for middle column in body. Looking for a super light blue color.*/
 body {
     background-color:#CDFFFF;
-    min-height: 100%;
 }
 
 /* background color for nav. Looking for a medium to dark green for constrast. Dark pine green 003300 or medium blue 073A7F background with goldenrod font (alternative: E03E00, FF7C00, FF9A00) */
@@ -112,6 +111,24 @@ h3 {
 .highlightCurrentUser {
     font-weight: bolder;
     color: #CC5A00;
+}
+
+    /*for a sticky footer you need this html, body, and footer sections*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 20px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 20px;
 }
 
                     /*       Media Queries   */

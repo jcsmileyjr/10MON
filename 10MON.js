@@ -223,5 +223,21 @@ app.controller('monsterController', function($scope, $http, $filter){
 }/*end of for logIn Function*/ 
     /*                          End of Log-In Codebase               */    
 
+    /*                      Log-out Codebase                */
+    
+    $scope.logOut = function(){
+        /*clear the currentUser global variable*/
+        $scope.currentUser = "";
+        /*clear the logIn page password global variable*/
+        $scope.userPwd = "";
+        /*clear the logIn page userName global variable*/
+        $scope.userName = "";
+        /*clear the client side main data array*/
+        $scope.newArray=[];
+        /*lock down the navigation*/
+        $scope.enableNav= false;
+        /*tranfer user to the logInPage*/
+        $scope.setView("logInPage");
+    }
     
 });
