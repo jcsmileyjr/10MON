@@ -151,7 +151,7 @@
                             {{x.weightLoss}} lbs
                         </span>
                         
-                        <!-- if check box is checked, false, then weightLoss is displayed. -->
+                        <!-- show the days since last update for each user -->
                         <span class="smallFont">
                             {{x.lastUpdate}} days ago
                         </span>                        
@@ -165,6 +165,11 @@
                         <span ng-show="x.name==currentUser && upOrDown<0" style="color:red">
                             {{upOrDown}} lbs Gained
                         </span>
+                        
+                        <!-- based on if the winner variable is true -->
+                        <span ng-show="x.winner==true" style="color:#FF9A00">
+                            WINNER
+                        </span>                        
                     </div>
                         
                 </div><!--end of repeat row  && $scope.upOrDown>0-->
