@@ -142,7 +142,7 @@
                     </div>                    
                     <div class= "col-xs-6 col-sm-6 col-md-4 col-lg-4 ">
                         <!--if check box is checked, true, then percentLoss is displayed. It is shown with a number filter -->
-                        <span ng-show="percentOrPounds == true">
+                        <span ng-show="percentOrPounds == true && x.name==currentUser">
                             {{x.percentLoss*100 | number: 1  }} %
                         </span>
                         

@@ -28,14 +28,20 @@ app.controller('monsterController', function($scope, $http, $filter){
     $scope.getWeightLoss = function(){
         /*loops throught the userData array*/
         for(var j=0; j<$scope.userData.length;j++){
-            /*divides current userData array elment weightloss by the startWeight to get percentage lost*/
-            $scope.currentPercentLoss = $scope.userData[j].weightLoss / $scope.userData[j].startWeight;
-            
             /*gets the last day since update number for each user*/
             $scope.daysSinceLastUpdate = Math.round(Math.abs(($scope.UpdateDate.getTime() - $scope.userData[j].lastUpdate.getTime())/($scope.oneDay))); 
             
             /*myArray variable is populated with each user array element plus percent loss and except the weight*/
-            $scope.newArray[j]= {"name":$scope.userData[j].name, "weightLoss":$scope.userData[j].weightLoss, "percentLoss":$scope.currentPercentLoss, "lastUpdate": $scope.daysSinceLastUpdate, "winner":$scope.userData[j].winner};  
+            $scope.newArray[j]= {"name":$scope.userData[j].name, "weightLoss":$scope.userData[j].weightLoss, "lastUpdate": $scope.daysSinceLastUpdate, "winner":$scope.userData[j].winner};
+
+            /*search the userData array for the element containg the currentUser*/
+            if($scope.currentUser==$scope.userData[j].name){  /*checks each element for a match */
+                /*divides current userData array elment weightloss by the startWeight to get percentage lost*/
+                $scope.currentPercentLoss = $scope.userData[j].weightLoss / $scope.userData[j].startWeight;
+                
+                /*Gives only the currentUser the percentLoss variable*/
+                $scope.newArray[j].percentLoss = $scope.currentPercentLoss;
+            }            
         }/*end of j-loop*/     
     }/* end of getWeightLoss function*/
     
