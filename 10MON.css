@@ -30,26 +30,27 @@ input {
 
 /*set app primary color schema to Submit and Reset Button Code*/
 .submitResetButtons {
-    background-color: FF9A00;
+    background-color: #FF9A00;
     color: black;
     font-weight: normal;
+    font-weight: bolder;
+    font-size: 110%;
 }
-
+/*
 .btn {
     font-weight: bolder;
     font-size: 110%;
 }
-
+*/
                                     /*BACKGROUND COLOR*/
 /* background color for middle column in body. Looking for a super light blue color.*/
 body {
-    background-color:CDFFFF;
-    min-height: 100%;
+    background-color:#CDFFFF;
 }
 
 /* background color for nav. Looking for a medium to dark green for constrast. Dark pine green 003300 or medium blue 073A7F background with goldenrod font (alternative: E03E00, FF7C00, FF9A00) */
 .navColor {
-    background-color: 073A7F;
+    background-color: #073A7F;
     color: white;
 }
 
@@ -63,7 +64,7 @@ body {
 
 /* almost black font color for all text but the nav.*/
 p, h4 {
-    color: 333333;
+    color: #333333;
     
 }
 
@@ -80,7 +81,7 @@ p {
 /* almost black font color for all text but the nav.*/
 h3 {
     text-align: center;
-    color: 333333;    
+    color: #333333;    
 }
 
 .redColor {
@@ -101,14 +102,46 @@ h3 {
 
 /*alternate background color between shades (B8E5E5) of light blue for user data  */
 .alternatingRows:nth-child(even) {
-  background-color: B8E5E5 ;
+  background-color: #B8E5E5 ;
 } 
 
 
                                 /*NG-CLASS CODE*/
-
+/* On the ranking page, the text on the current user row is highlighted with ng-class. A shade of the primary action color #FF9A00 was used. */
 .highlightCurrentUser {
     font-weight: bolder;
-    color: 073A7F;
+    color: #CC5A00;
+}
+
+    /*for a sticky footer you need this html, body, and footer sections*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 20px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 20px;
+}
+
+                    /*       Media Queries   */
+
+    /* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+    /* in mobile view, shrink App Title */ 
+    .appTitle {
+        font-size: 160%;
+    }
+    
+    .navTitle {
+        font-size: 130%;
+    }
 }
 
