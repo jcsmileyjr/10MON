@@ -14,8 +14,16 @@
 <script src="libs/ui-bootstrap-tpls-2.5.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="10MON.css"/>
 <script src="10MON.js"></script>
-<script src="logIn.controller.js"></script>
-
+<script src="services/userDataService.js"></script>
+<script src="services/timeService.js"></script>
+<script src="services/updateUserDataService.js"></script>
+<script src="services/credService.js"></script>
+<script src="services/setViewService.js"></script>
+<script src="services/currentWeekService.js"></script>
+<script src="services/newUserService.js"></script>
+<script src="services/randomQuoteService.js"></script>
+<script src="services/newArrayService.js"></script>
+<script src="services/currentWeightLossService.js"></script>    
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/> 
 <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1, maximum-scale=1" charset="utf-8">    
 <title>Chasing the 10 Pound Monster</title>
@@ -47,7 +55,7 @@
         <div class="hidden-xs hidden-sm col-md-3 col-lg-3"></div><!--end of left main column  -->
         
             <!-- Start of LogIn Page-->
-            <div ng-include="'logInPage.html'" ng-show="view=='logInPage'" >                
+            <div ng-include="'logInPage.html'" ng-show="view=='logInPage'">                
             </div><!--end of Log-in Page-->
             
             <!-- Start of Ranking Page-->
