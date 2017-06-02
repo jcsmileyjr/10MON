@@ -1,0 +1,53 @@
+<div  class= "col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <form name="logInform" novalidate>
+                    <!--Login Name input area -->
+                    <!--The message variable states log-in failure -->
+                    <br><br><p class="redColor">{{message}}</p>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <label for="inputLogInName">Player Name</label>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <input name="inputlogInName" type="text" ng-model="userName" size="10" required>
+                        <!--input field validation. Checking for if valid and if field been clicked on and left empty-->
+                        <span ng-show="logInform.inputlogInName.$invalid && !logInform.inputlogInName.$pristine">Required!</span>                  
+                    </div>
+                    <!--Login password input area -->
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <br>
+                        <label for="inputLogInpwd">Password </label>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <br>
+                        <input name="inputlogInpwd" type="password" ng-model="userPwd" size="10" required>
+                        <!--input field validation. Checking for if valid and if field been clicked on and left empty-->
+                        <span ng-show="logInform.inputlogInpwd.$invalid && !logInform.inputlogInpwd.$pristine">Required!</span>
+                        <p>{{fail}}<p>
+                        <br>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 centerAlign">
+                    <!--submit new suspects button "disable" till valid validation-->
+                    <button type="submit" name="submit" ng-disabled="logInform.$invalid" class="btn btn-md  submitResetButtons" ng-click="logIn(userName, userPwd)">Submit Password</button>
+                    </div>
+              
+                </form>
+
+                    <!--Button Link to New Player Set-up Page -->
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 centerAlign">
+                        <br><br>
+                        <button type="submit" name="submitJoinChallenge" class="btn btn-md  submitResetButtons" ng-click="joinChallenge('setUpPage')">Click to Join the Challenge</button>
+                    </div>                     
+                
+                
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><br><br>      
+                    <p>
+                        A coke a day. Tastes refreshing, instant smiles <i class="fa fa-smile-o" aria-hidden="true" style="background-color:yellow"></i>, a moment of complete happiness <i class="fa fa-heart" aria-hidden="true" style="color:red"></i>. However, science estimates every extra coke a day adds 15 pounds a year and other issues you can’t see with each delicious sip <i class="fa fa-thumbs-o-down" aria-hidden="true" style="color:blue"></i>. With more mental effort, one extra bottle of water <i class="fa fa-tint" aria-hidden="true" style="color:blue"></i>, fruit for breakfast <i class="fa fa-apple" aria-hidden="true" style="color:green"></i>, vegetables with lunch, or several small 10 minutes walks a day can extend your life <i class="fa fa-thumbs-o-up" aria-hidden="true" style="color:blue"></i>.
+                    </p>
+                    <p>
+                        Chasing the 10 Pound Monster is a weight loss challenge web app. The objective is to be the first player <i class="fa fa-user" aria-hidden="true" style="color:blue"></i> to lose 10 pounds. Players will enter their weight daily or weekly into the web app. The web app will show only the gain <i class="fa fa-plus" aria-hidden="true" style="color:green"></i> or loss <i class="fa fa-minus" aria-hidden="true" style="color:red"></i>, not the actual weight, for players. 
+                    </p>
+                    <p>
+                        10 pounds is an attainable, measureable, and visible fitness goal. The best part is it can be done in a short time period <i class="fa fa-clock-o" aria-hidden="true" style="color:red"></i>. So choose, do you want or need to chase the 10 Pound Monster?
+                    </p>
+                </div>    
+                
+            </div><!--end of Log-in Page-->

@@ -1,0 +1,36 @@
+        <div class= "col-xs-12 col-sm-12 col-md-6 col-lg-6" ><!--start of Weight-Loss Weigh-In -->
+            <br>
+            <div class= "col-xs-6 col-sm-6 col-md-6 col-lg-6 centerAlign">
+                <p>Weigh-In</p>
+            </div>                        
+            <div class= "col-xs-6 col-sm-6 col-md-6 col-lg-6 centerAlign">
+                <p>Week {{currentWeek}}</p>
+                <br><br>
+            </div>             
+            <form name="weighInform" novalidate>
+                <!--Weigh-In input area -->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <label for="inputWeighIn">{{currentUser}}, Please Enter Your Weight </label><br><br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <input name="inputWeighIn" type="number" ng-model="weight" size="15" required>
+                    <!--input field validation. Checking for if valid and if field been clicked on and left empty-->
+                    <span ng-show="weighInform.inputWeighIn.$invalid && !weighInform.inputWeighIn.$pristine">Required!</span>
+                    <p>{{fail}}<p><br>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 centerAlign">
+                    <!--submit new suspects button "disable" till valid validation-->
+                    <button type="submit" name="submitWeight" ng-disabled="weighInform.$invalid" class="btn btn-sm submitResetButtons" ng-click="weighIn(weight)">Submit Weight</button>
+                </div>
+            </form>
+            <!--Creates a big column at the bottom of the weighIn page that is seperate, similar to overall app, into three smaller columns. The middle column contain the action. Its bigger on mobile, 12 size, while size 6 on desktop with two size 3 side columns.  -->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="hidden-xs col-sm-3 col-md-3 col-lg-3"></div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <br><br>
+                        <h4 class="">Random Inspirational Quote of the Day</h4>
+                        <p class="">{{randomQuote}}</p>
+                </div>
+                <div class="hidden-xs col-sm-3 col-md-3 col-lg-3"></div>                
+            </div>               
+        </div><!--end of Weigh-In Page-->
