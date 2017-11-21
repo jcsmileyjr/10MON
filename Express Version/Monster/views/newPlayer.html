@@ -1,0 +1,53 @@
+            
+        <div class= "col-xs-12 col-sm-12 col-md-6 col-lg-6" ><!--start of New Player Set-up -->
+            <h2>New Player Setup</h2><br><br>
+            <!--start of New Player form -->    
+            <form name="setUpform" novalidate>
+                <!--New Player Setup input area -->
+                <!--Label and Input box for Name, include Validation -->
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
+                    <label for="inputName">Please Enter Your Full Name</label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <input name="inputName" type="text" ng-model="name" size="20" required>
+                    <!--input field validation. Checking for if valid and if field been clicked on and left empty-->
+                    <span ng-show="setUpform.inputName.$invalid && !setUpform.inputName.$pristine">Required!</span>
+                    <p>{{fail}}<p>
+                </div>
+                <!--Label and Input box for Password, include Validation -->
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
+                    <label for="inputSetUpPwd">Please Enter a Password </label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <input name="inputSetUpPwd" type="text" ng-model="setUpPwd" size="20" required>
+                    <!--input field validation. Checking for if valid and if field been clicked on and left empty-->
+                    <span ng-show="setUpform.inputSetUpPwd.$invalid && !setUpform.inputSetUpPwd.$pristine">Required!</span>
+                    <p>{{fail}}<p>
+                </div>
+                <!--Label and Input box for Start Weight, include Validation -->
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
+                    <label for="inputStartWeight">Please Enter Current Weight </label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <input name="inputStartWeight" type="number" ng-model="setUpWeight" size="15" required>
+                    <!--input field validation. Checking for if valid and if field been clicked on and left empty-->
+                    <span ng-show="setUpform.inputStartWeight.$invalid && !setUpform.inputStartWeight.$pristine">Required!</span>
+                    <p>{{fail}}<p><br>
+                </div>
+                <!--Buttons for Submit and Reset, include Validation -->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 centerAlign">
+                    <!--submit new suspects button "disable" till valid validation-->
+                    <button type="submit" name="submitNewPlayer" ng-disabled="setUpform.$invalid" class="btn btn-sm submitResetButtons" ng-click="newPlayer(name, setUpPwd, setUpWeight)">Add New Player</button>
+                </div>                        
+            </form>
+            
+            <!--Creates a big column at the bottom of the weighIn page that is seperate, similar to overall app, into three smaller columns. The middle column contain the action. Its bigger on mobile, 12 size, while size 6 on desktop with two size 3 side columns.  -->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <br><br>
+                    <h4>Disclaminers</h4>
+                    <p>If you mess up and need to delete your account, contact the administrator.</p>
+                    <p>Please do not use a sensitive password. An example is your bank account password. Use something you will remember but not worry about</p>
+                    <p>Your weight is not shown, ever, to you or anyone else after this point. Only the total weight loss in pounds (2.4 lbs) or percentage (2.1%) is shown</p>
+                </div>
+                               
+            </div><!--End of New Player Setup page -->

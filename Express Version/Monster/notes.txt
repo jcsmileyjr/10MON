@@ -1,0 +1,99 @@
+    /*the starting page is set to the login page */
+    SetView.setView('logInPage');
+  
+    $scope.view = SetView.getView();
+    
+    $scope.$watch(
+        function(){ return SetView.getView(); },
+
+        function(newVal) {
+          $scope.view = newVal;
+        });
+        
+/* Service to allow sharing of enableNav and join variables by returning and updating them. The setView method returns a page name to the scope.view variable to change pages if the enableNav variable is true. If it is false, then user can only view the log-in page.*/
+app.service('SetView', function(){
+    this.enableNav = false;
+    this.join = "join";
+    this.view = "view";
+    
+    
+    this.setEnableNav = function(x){
+        this.enableNav = x;
+    }
+    
+    this.getEnableNav = function(){
+        return this.enableNav;
+    }
+    
+    this.getJoin = function(){
+        return this.join;
+    }
+    
+    this.setJoin = function(x){
+        this.join = x;
+    }
+    
+    this.getView = function(){
+        return this.view;
+      
+    }
+    
+    this.setView = function(x){
+        if(this.enableNav==true){
+            /*the varible view is set to the ng-show in each view*/        
+            this.view = x;
+           
+        }/*end of if statment*/  
+        else{
+            this.view ="logInPage" ;
+          
+        }/*end of else statment*/        
+    }
+    
+
+});     
+
+https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js
+
+ 
+// create application/x-www-form-urlencoded parser
+//var urlencodedParser = bodyParser.urlencoded({ extended: false });
+ 
+app.get('/cred', function(req, res){
+    res.sendFile('/cred.json',{root:__dirname});
+});
+
+$http.get("/cred")
+    .then(function(response){
+    cred =  response.data; 
+})
+//var local = __dirname + '/views';
+//var database = __dirname +'/users.json';
+//var thoughts = __dirname + '/thoughts.txt';
+/*
+app.get('/thoughts', function(req, res){
+    //the root: could be __dirname + '/public'
+    res.sendFile('/thoughts.txt',{root:__dirname});
+});
+
+app.get('/database', function(req, res){
+    res.sendFile('/users.json',{root:__dirname});
+});
+*/
+// or app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(local));
+
+but the object is returned empty, before the ajax-request is done.
+
+/*
+app.use('/cred', function(req, res,next){
+    
+    var userName = req.body.name;
+    var pwd = req.body.password;
+    
+    var success = cred.logIn(userName, pwd);
+    
+    req.body.success = success;
+    next();
+});
+*/
