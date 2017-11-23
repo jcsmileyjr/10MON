@@ -3,11 +3,12 @@
 app.service('CurrentWeightLoss', function(NewArray, NewUser){
     var currentWeightLoss = 0;
     var upOrDown = 0;
-    this.newArray = NewArray.weightLessArray();
+    this.newArray = [];
     this.currentUser = NewUser.list();
     
     /*function attached to log-In page submit button that gets the current user weightLoss information. This is assign to the currentWeightLoss variable used in the getWeightScale function to determine the upOrDown shared variable.*/    
     this.getCurrentWeightLoss = function(){
+		this.newArray = NewArray.getNewArray();
         for(var i=0;i<this.newArray.length;i++){
             if(this.currentUser==this.newArray[i].name){
                 currentWeightLoss = this.newArray[i].weightLoss
