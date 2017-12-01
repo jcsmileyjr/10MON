@@ -1,0 +1,88 @@
+<html lang="en">
+<head>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>    
+<link rel="stylesheet" href="libs/bootstrap.min.css">
+<!-- Optional Bootstrap theme -->
+<link rel="stylesheet" href="libs/bootstrap-theme.min.css">
+<script src="libs/bootstrap.min.js"></script>
+<script src="libs/angular.min.js"></script>
+<!--ui-bootstrap needed for collasping the nav. Can also learn angularStrap -->
+<script src="libs/ui-bootstrap-tpls-2.5.0.min.js"></script>
+<script src="https://unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>    
+<link rel="stylesheet" type="text/css" href="10MON.css"/>
+<script src="app.js"></script>
+
+<script src="services/userDataService.js"></script>
+<script src="services/timeService.js"></script>
+<script src="services/updateUserDataService.js"></script>
+<script src="services/credService.js"></script>
+<script src="services/setViewService.js"></script>
+<script src="services/currentWeekService.js"></script>
+<script src="services/newUserService.js"></script>
+<script src="services/randomQuoteService.js"></script>
+<script src="services/newArrayService.js"></script>
+<script src="services/currentWeightLossService.js"></script>
+<script src="10MON.js"></script>    
+<!--logIn files -->    
+<script src="views/logIn.html"></script>
+<script src="logIn.controller.js"></script>
+    
+<!--weighIn files -->    
+<script src="views/weighIn.html"></script>
+<script src="weighIn.controller.js"></script>
+    
+<!--Ranking files -->    
+<script src="views/ranking.html"></script>
+<script src="rankingController.js"></script>
+    
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/> 
+<meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1, maximum-scale=1" charset="utf-8">    
+<title>Chasing the 10 Pound Monster</title>
+</head>
+<!--sets the HTML document to a angularJS app call myApp -->
+<body ng-app="10MON" ng-controller="monsterController" >
+<!--creates a navigation area, fixed to the top of the screen, and set it to "Bootstrap" default -->
+<nav class="navbar-default" >
+  <!-- -->
+    <div class="container-fluid navColor">
+        <div class="row">
+            <!--Display title of the app & link to Player Ranking Page -->
+            <div class= "col-xs-12 col-sm-12 col-md-12 col-lg-12">             
+                <h1 class="text-center appTitle" ng-click="home()">Chasing the 10 Pound Monster</h1>
+            </div>
+            <!--Nav link to Player Ranking Page -->
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 navLinkTextRight">
+                <!--<a href="#" class="btn btn-link" role="button" ng-click="navigation('rankingPage')"><h4 class="navTitle">Player Ranking</h4></a>-->
+				<a ui-sref="ranking"><h4 class="navTitle">Player Ranking</h4></a>
+            </div>
+            <!--Nav Link to Weigh-In Page -->
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 leftAlign">
+                <!--<a href="#" class="btn btn-link" role="button" ng-click="navigation('weighInPage'); getRandomQuote()"><h4 class="navTitle">Weigh-In</h4></a>-->
+				<a ui-sref="weighIn"><h4 class="navTitle">Weigh-In</h4></a>
+            </div>
+        </div>
+    </div>
+</nav>   
+<div class="container-fluid">
+    <div class="row">
+        <div class="hidden-xs hidden-sm col-md-3 col-lg-3"></div><!--end of left main column  -->
+        
+        <!-- Start of page viewport-->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div ui-view></div>
+        </div><!--End of page viewport, center column -->
+        
+        <div class="hidden-xs hidden-sm col-md-3 col-lg-3 "></div><!--end of right main column-->
+    </div><!--end of row that contains the body -->
+    <footer>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 centerAlign">
+            <a href="#" class="btn btn-link" role="button"><i class="fa fa-sign-out" aria-hidden="true" style="color:#333333" ng-click="logOut()">Log Out</i></a>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 centerAlign">
+            <p>Developed by JC Smiley</p>
+        </div>
+    </footer>
+</div><!--end of container of the row that contains the body -->
+</body>    
+</html>

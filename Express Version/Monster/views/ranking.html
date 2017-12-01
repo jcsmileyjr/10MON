@@ -1,0 +1,76 @@
+<div class= "col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <br>
+            <div class= "col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class= "col-xs-8 col-sm-6 col-md-6 col-lg-6 leftAlign">
+                    <p>Player Ranking</p>
+                </div>
+                        
+                <div class= "col-xs-4 col-sm-6 col-md-6 col-lg-6 centerAlign">
+                    <p>Week {{currentWeek}}</p>
+                </div>                
+
+                <!--center aligns the total weight loss's percentage or pounds checkbox-->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 centerAlign">
+                    <p>
+                        View as Percentage Loss                   
+                        <input type="checkbox" ng-model="percentOrPounds">
+                    </p>
+                <br><br>
+                </div>  
+            </div><!--end of Ranking Page title-->
+ 
+            <div class="container-fluid">
+                <div class="row">
+                    <div class= "col-xs-2 col-sm-2 col-md-4 col-lg-4">
+                    <h4>Rank</h4>
+                    </div><!--end of Ranking title-->
+                    <div class= "col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
+                        <h4>Player Name</h4>
+                    </div><!--end of Player Name title-->
+                    <div class= "col-xs-6 col-sm-6 col-md-4 col-lg-4 ">
+                        <h4>Total Weight Loss</h4>
+                    </div><!--end of Weight loss title-->
+                </div>    
+                <div class="row rankingFontSize alternatingRows" ng-repeat="x in newArray | orderBy:'-weightLoss'" ng-class="{'highlightCurrentUser':x.name==currentUser}">
+                    
+                    <div class= "col-xs-2 col-sm-2 col-md-4 col-lg-4">
+                        {{$index + 1}}
+                    </div>                    
+                    <div class= "col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
+                        {{x.name}}
+                    </div>                    
+                    <div class= "col-xs-6 col-sm-6 col-md-4 col-lg-4 ">
+                        <!--if check box is checked, true, then percentLoss is displayed. It is shown with a number filter -->
+                        <span ng-show="percentOrPounds == true && x.name==currentUser">
+                            {{x.percentLoss*100 | number: 1  }} %
+                        </span>
+                        
+                        <!-- if check box is checked, false, then weightLoss is displayed. -->
+                        <span ng-show="percentOrPounds == false">
+                            {{x.weightLoss}} lbs
+                        </span>
+                        
+                        <!-- show the days since last update for each user -->
+                        <span class="smallFont">
+                            {{x.lastUpdate}} days ago
+                        </span>                        
+                        
+                        <!-- based on the upOrDown variable changing positively after a user weigh-In, displays a plus symbol and pounds lost -->
+                        <span ng-show="x.name==currentUser && upOrDown>0">
+                            <i class="fa fa-plus" aria-hidden="true" style="color:#1BAD83">{{upOrDown}} lbs Lost</i>
+                        </span>
+                        
+                        <!-- based on the upOrDown variable changing negatively after a user weigh-In, displays a minus symbol and pounds gained -->
+                        <span ng-show="x.name==currentUser && upOrDown<0" style="color:red">
+                            {{upOrDown}} lbs Gained
+                        </span>
+                        
+                        <!-- based on if the winner variable is true -->
+                        <span ng-show="x.winner==true" style="color:#FF9A00">
+                            WINNER
+                        </span>                        
+                    </div>
+                        
+                </div><!--end of repeat row  && $scope.upOrDown>0-->
+            </div><!--end of row container-->            
+        </div><!--end of Ranking Page-->

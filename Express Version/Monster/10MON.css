@@ -1,0 +1,147 @@
+                                    /*NAVIGATION Code*/
+/*centers the page titles and nav app title*/
+h1, h2{
+    text-align: center;
+}
+
+/* right side align Player Ranking nav link*/
+.navLinkTextRight {
+    text-align: right;   
+}
+
+                                    /* INPUT BUTTON and LABELS Code*/
+/* increase font-size of user input boxes and labels*/
+input, label {
+    font-size: 140%;    
+}
+
+/* Enlarge the input boxe border, add background color, border color (CCFFCC), add margin and padding*/
+input {
+        border-style: groove;        
+        border-color: black;
+}
+
+/* sets a different border for reset buttons from the regular input buttons on the logIn and weighIn pages*/
+.noBorder {
+    border-radius: 6px;
+    border-color: grey;
+    border-width: thin;
+}
+
+/*set app primary color schema to Submit and Reset Button Code*/
+.submitResetButtons {
+    background-color: #FF9A00;
+    color: black;
+    font-weight: normal;
+    font-weight: bolder;
+    font-size: 110%;
+}
+/*
+.btn {
+    font-weight: bolder;
+    font-size: 110%;
+}
+*/
+                                    /*BACKGROUND COLOR*/
+/* background color for middle column in body. Looking for a super light blue color.*/
+body {
+    background-color:#CDFFFF;
+}
+
+/* background color for nav. Looking for a medium to dark green for constrast. Dark pine green 003300 or medium blue 073A7F background with goldenrod font (alternative: E03E00, FF7C00, FF9A00) */
+.navColor {
+    background-color: #073A7F;
+    color: white;
+}
+
+                                    /*BODY ELEMENTS CODE*/
+
+/* increase font size and line height for ranking page information*/
+.rankingFontSize {
+    font-size: 130%;
+    line-height: 190%;
+}
+
+/* almost black font color for all text but the nav.*/
+p, h4 {
+    color: #333333;
+    
+}
+
+/* font color for nav links, goldenrod.*/
+nav h4 {
+    color: white;    
+}
+
+/* increase font size for logIn page intro and weighIn page random advice*/
+p {
+    font-size: 120%;    
+}
+
+/* almost black font color for all text but the nav.*/
+h3 {
+    text-align: center;
+    color: #333333;    
+}
+
+.redColor {
+    color: red;
+}
+
+.leftAlign {
+    text-align: left;
+}
+
+.centerAlign {
+    text-align: center;
+}
+
+.smallFont {
+    font-size: 70%;
+}
+
+/*alternate background color between shades (B8E5E5) of light blue for user data  */
+.alternatingRows:nth-child(even) {
+  background-color: #B8E5E5 ;
+} 
+
+
+                                /*NG-CLASS CODE*/
+/* On the ranking page, the text on the current user row is highlighted with ng-class. A shade of the primary action color #FF9A00 was used. */
+.highlightCurrentUser {
+    font-weight: bolder;
+    color: #CC5A00;
+}
+
+    /*for a sticky footer you need this html, body, and footer sections*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 20px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 20px;
+}
+
+                    /*       Media Queries   */
+
+    /* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+    /* in mobile view, shrink App Title */ 
+    .appTitle {
+        font-size: 160%;
+    }
+    
+    .navTitle {
+        font-size: 130%;
+    }
+}
+
