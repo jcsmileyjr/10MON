@@ -1,4 +1,4 @@
-                                                    # Chasing the 10 Pound Monster
+# Chasing the 10 Pound Monster
 
 ### Purpose:
 
