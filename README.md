@@ -26,10 +26,15 @@ I work in an office of 25 people. Throughout the year I hosted several biggest l
 ### This app was built with the following technologies:
 
 **Bootstrap:** Web development framework for developing responsive, mobile first front-end projects
+
 **AngularJS:** JavaScript-based front-end framework for building single page web applications.
+
 **Git-Hub:** web-based version control repository and Internet hosting service
+
 **JavaScript:**  object-oriented programming language for web pages
+
 **HTML:**  Mark-up language for creating web pages
+
 **CSS:**  A formatting language for styling web pages
 
 Create by JC Smiley in May of 2017
