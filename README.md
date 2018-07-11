@@ -37,4 +37,13 @@ I work in an office of 25 people. Throughout the year I hosted several biggest l
 
 **CSS:**  A formatting language for styling web pages
 
+### The production version was deployed with the following technologies:
+
+** Heroku: ** A cloud platform (PaaS) for deploying web apps
+
+**Node.js** Server side development platform created to run JavaScript
+
+**ExpressJS** A Node.js web application server framework
 Create by JC Smiley in May of 2017
+
+(currently not in use)
