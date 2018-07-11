@@ -54,6 +54,16 @@ app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $url
 
         })
 	
+        //The about state redirects the user to the about.html template via the /about url. 
+
+        .state('about', {
+
+            url:'/about',
+
+            templateUrl: 'about/about.html'
+
+        })	
+	
 }]);
 
 
