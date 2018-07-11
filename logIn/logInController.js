@@ -1,4 +1,4 @@
-app.controller('logInController', function($scope, $state, Cred, NewUser, NewArray, CurrentWeightLoss){
+app.controller('logInController', function($scope, $state, Cred, NewUser, NewArray, CurrentWeightLoss, RandomQuote){
 
     /*function attached to log-In page submit button. Takes as parameters the current userName variable (from logIn page) and pwd variable (from logIn page) to check against a authentication array.*/
     $scope.logIn = function(userName, pwd) {
@@ -33,5 +33,8 @@ app.controller('logInController', function($scope, $state, Cred, NewUser, NewArr
 
 
 }/*end of for logIn Function*/
+	
+    /*sets the random quote variable on the weighIn page from the RandomQuote service*/
+    $scope.randomQuote = RandomQuote.getQuote();	
     
 });
