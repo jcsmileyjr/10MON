@@ -29,5 +29,15 @@
                     <button type="submit" name="submit" ng-disabled="logInform.$invalid" class="btn btn-md  submitResetButtons" ng-click="logIn(userName, userPwd)">Submit Password</button>
                     </div>
               
-                </form>                
+                </form>
+	            <!--Creates a big column at the bottom of the weighIn page that is seperate, similar to overall app, into three smaller columns. The middle column contain the action. Its bigger on mobile, 12 size, while size 6 on desktop with two size 3 side columns.  -->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="hidden-xs col-sm-2 col-md-2 col-lg-2"></div>
+                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                        <br><br>
+                        <h4 class="">Random Inspirational Quote of the Day</h4>
+                        <p class="">{{randomQuote}}</p>
+                </div>
+                <div class="hidden-xs col-sm-2 col-md-2 col-lg-2"></div>                
+            </div> 
             </div><!--end of Log-in Page-->
