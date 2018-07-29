@@ -35,6 +35,7 @@ input {
     font-weight: normal;
     font-weight: bolder;
     font-size: 110%;
+	box-shadow: 1px 1px #5E5E5E; /*dark shadow under the button*/
 }
 /*
 .btn {

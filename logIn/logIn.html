@@ -18,15 +18,17 @@
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <br>
-                        <input name="inputlogInpwd" type="password" ng-model="userPwd" size="10" placeholder="1" required>
+                        <input name="inputlogInpwd" type={{showPassword}} ng-model="userPwd" size="10" required placeholder="1">
+						<p class="smallFont">Show Password                   
+                        	<input type="checkbox" ng-model="changePwd" ng-click="hidePassword()">
+                    	</p>
                         <!--input field validation. Checking for if valid and if field been clicked on and left empty-->
                         <span ng-show="logInform.inputlogInpwd.$invalid && !logInform.inputlogInpwd.$pristine">Required!</span>
-                        <p>{{fail}}<p>
                         <br>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 centerAlign">
                     <!--submit new suspects button "disable" till valid validation-->
-                    <button type="submit" name="submit" ng-disabled="logInform.$invalid" class="btn btn-md  submitResetButtons" ng-click="logIn(userName, userPwd)">Submit Password</button>
+                    <button type="submit" name="submit" ng-disabled="logInform.$invalid" class="btn btn-warning btn-md  submitResetButtons" ng-click="logIn(userName, userPwd)">Submit Password</button>
                     </div>
               
                 </form>
