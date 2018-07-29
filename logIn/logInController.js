@@ -32,9 +32,22 @@ app.controller('logInController', function($scope, $state, Cred, NewUser, NewArr
         }/*end of for i-loop*/ 
 
 
-}/*end of for logIn Function*/
+	}/*end of for logIn Function*/
 	
     /*sets the random quote variable on the weighIn page from the RandomQuote service*/
-    $scope.randomQuote = RandomQuote.getQuote();	
+    $scope.randomQuote = RandomQuote.getQuote();
+	
+	$scope.showPassword = "password"; //set login page password input field to password type
+	
+	$scope.changePwd = false; //set login page "Show password" checkbox initial value to false
+	
+	/*function to change login password input from hidden to show*/
+	$scope.hidePassword = function(){
+		if($scope.changePwd == false){
+			$scope.showPassword = "password";//set input field to password
+		} else{
+			$scope.showPassword = "text"; //set input field to text
+		}
+	}	
     
 });
